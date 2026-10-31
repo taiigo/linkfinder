@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+    </style>
+
+    <rect width="100" height="100" fill="#000"/>
+
+    <text id="status" x="50" y="50" fill="#fff" font-family="Arial, sans-serif" font-size="3" text-anchor="middle" dominant-baseline="middle">finding link</text>
+
+    <script><![CDATA[
+        const links = [
+            'https://ongoingeducation.online',
+            'https://exam.sourcescs.com',
+            'https://mzu.educationalhelpus.online',
+            'https://work.readywintersprings.org',
+            'https://reading.dailey1.net',
+            'https://calc.genovia.ro',
+            'https://anatomy.medscience.cl',
+            'https://preposteroustomato.myk.sh',
+            'https://tomato.n43.pw',
+            'https://cdn.jsdelivr.net/gh/taiigo/mizumath/index.svg'
+        ];
+
+        async function findlink() {
+            for (const link of links) {
+                try {
+                    const res = await fetch(`${link}/api/check/`, {
+                        cache: 'no-store',
+                        signal: AbortSignal.timeout(3000)
+                    });
+
+                    if (res.ok && (await res.text()).trim() === 'works') {
+                        location.replace(link);
+                        return;
+                    }
+                } catch {}
+            }
+
+            document.getElementById('status').textContent = 'failed to find link join discord.gg/uncensor';
+        }
+
+        findlink();
+    ]]></script>
+</svg>
